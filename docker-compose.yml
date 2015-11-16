@@ -3,9 +3,9 @@ nginx:
   links:
     - phpfpm
   ports:
-    - "8080:80"
+    - "80:80"
   volumes_from:
-    - htdocs
+    - htdocs:rw
 phpfpm:
   build: php-5.6-fpm-custom
   volumes_from:
@@ -21,4 +21,4 @@ htdocs:
   image: busybox
   stdin_open: true
   volumes:
-    - htdocs:/var/www/html
+    - ./htdocs:/var/www/html
