@@ -1,8 +1,8 @@
-# docker-lemp
+# varying-docker-dockers
 
-Run Nginx, php-fpm and MariaDB using [Docker]
+VDD is an attempt at a VVV-inspired development environment for WordPress, minus the overhead of a Virtual Machine
 
-## Requirements
+# Requirements
 Install [Docker] and [Compose]
 
 ## Usage
