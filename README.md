@@ -1,6 +1,8 @@
-# varying-docker-dockers
+# Varying Docker Dockers
 
-VDD is an attempt at a VVV-inspired development environment for WordPress, minus the overhead of a Virtual Machine
+VDD is an attempt at a VVV-inspired development environment for WordPress, minus the overhead of a Virtual Machine.
+
+still in pre-alpha form. Don't use this anywhere, unless you want to help out in development.
 
 # Requirements
 Install [Docker], [Compose] and [nsenter]
