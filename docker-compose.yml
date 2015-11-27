@@ -10,43 +10,62 @@
 
 ## It all starts with the base container. This is the container you'll be using
 ## to access the services you need.
-base:
-  build: base
-  stdin_open: true
-  volumes_from:
-    - htdocs:rw
-  links:
-    - node
+#base:
+  #build: base
+  #stdin_open: true.
+  #volumes:
+  #  - ./htdocs:/var/www/html
+  #links:
+  #  - node
+  #  - php
+  #container_name: vdd_base
 server:
   build: nginx-fpm
   links:
+    - node
     - php
     - memcached
   ports:
     - "80:80"
     - "443:443"
-  volumes_from:
-    - base:rw
+  volumes:
+    - ./htdocs:/var/www/html
+  #volumes_from:
+  # - base:rw
+  container_name: vdd_server
 memcached:
   image: memcached
   ports:
     - "11211:11211"
+  container_name: vdd_memcached
 php:
   build: php-5.6-fpm-custom
+  volumes:
+    - ./htdocs:/var/www/html
   volumes_from:
-    - base:rw
+    - db:rw
+  links:
     - db
+  environment:
+    TERM: xterm
+  container_name: vdd_php
 db:
   image: mariadb
   ports:
     - "3306:3306"
   volumes:
     - /var/run/mysqld
+    - ./db:/docker-entrypoint-initdb.d
   environment:
     MYSQL_ROOT_PASSWORD: root
+    TERM: xterm
+  container_name: vdd_db
 node:
   image: node
-htdocs:
-  build: base
-  volumes:
-    - ./htdocs:/var/www/html
+  container_name: vdd_node
+#htdocs:
+#  build: base
+#  volumes:
+#    - ./htdocs:/var/www/html
+#  command: ./provision.sh
+#  container_name: vdd_htdocs
